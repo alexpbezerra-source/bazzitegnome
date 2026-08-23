@@ -40,12 +40,16 @@ modules:
       packages:
         - rom-properties
         - waydroid
+        - lutris
+        - btrfs-assistant
     install:
       packages:
         - firefox
         - firefox-langpacks
         - google-chrome-stable
-        - ptyxis
+        - gnome-tweaks
+        - simple-scan
+        
        
        
   
