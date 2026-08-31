@@ -7,7 +7,7 @@ description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/bazzite-gnome
-image-version: stable # You can pin to a specific version of Fedora as well
+image-version: latest # You can pin to a specific version of Fedora as well
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -22,7 +22,19 @@ modules:
       # 1. Ensure /var/opt or appropriate directory symlinks exist to prevent cpio errors
       - mkdir -p /var/opt
       - rm /usr/share/applications/waydroid-container-restart.desktop
-      
+   
+      - |
+        cat << 'EOF' > /etc/yum.repos.d/google-chrome.repo
+        [google-chrome]
+        name=google-chrome
+        baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+        skip_if_unavailable=True
+        gpgcheck=1
+        gpgkey=https://dl.google.com/linux/linux_signing_key.pub
+        enabled=1
+        enabled_metadata=1
+        EOF
+
   - type: dnf
     
     remove:
@@ -34,9 +46,12 @@ modules:
       
     install:
       packages:
+        - firefox
+        - firefox-langpacks
+        - google-chrome-stable
         - gnome-tweaks
         - simple-scan
-        - btop
+        
        
        
   
