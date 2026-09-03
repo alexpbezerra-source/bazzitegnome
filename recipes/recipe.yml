@@ -22,7 +22,8 @@ modules:
       # 1. Ensure /var/opt or appropriate directory symlinks exist to prevent cpio errors
       - mkdir -p /var/opt
       - rm /usr/share/applications/waydroid-container-restart.desktop
-   
+      - dnf config-manager addrepo --id=mozilla --set=baseurl=https://packages.mozilla.org/rpm/firefox --set=gpgkey=https://packages.mozilla.org/rpm/firefox/signing-key.gpg --set=gpgcheck=1 --set=repo_gpgcheck=0 --set=priority=10
+      - dnf makecache --refresh
       - |
         cat << 'EOF' > /etc/yum.repos.d/google-chrome.repo
         [google-chrome]
@@ -43,14 +44,16 @@ modules:
         - waydroid
         - lutris
         - btrfs-assistant
-      
-    install:
-      packages:
         - firefox
         - firefox-langpacks
+    install:
+      packages:
         - google-chrome-stable
         - gnome-tweaks
         - simple-scan
+        - firefox
+        - firefox-l10n-pt-BR
+        
         
        
        
