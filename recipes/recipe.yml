@@ -65,6 +65,7 @@ modules:
         - simple-scan
         - firefox
         - firefox-l10n-pt-BR
+        - microsoft-edge-stable
         
         
        
